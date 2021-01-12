@@ -1,0 +1,13 @@
+{% extends 'wrepper.html' %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block content %}
+	{% for i in blog_article %}
+		<a href="{% url 'blog_article_list' i.title %}">{{ i.title }}</a>
+		<img style="width: 100px;" src='{{ i.poster.url }}'>
+		{{ i.auth_user }}  
+	{% endfor %}	
+{% endblock %}
