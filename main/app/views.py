@@ -64,8 +64,6 @@ def FillProfile(request):
             if form.is_valid():
                 form.save()
                 return redirect('/')
-            else:
-                print("noe")
         else:
             form = ProfileForm(instance=profile)
     return render(request, 'auth/fillprofile.html')
