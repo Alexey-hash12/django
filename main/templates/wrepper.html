@@ -10,6 +10,8 @@
   <title>{% block title %} {% endblock %}</title>
   {% include 'includes/style.html' %}
 </head>
+{% include 'includes/preloader.html' %}
+{% include 'includes/header.html' %}
 {% block content %} {% endblock %}
 {% include 'includes/script.html' %}
 </html>
