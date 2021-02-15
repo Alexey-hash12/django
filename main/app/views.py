@@ -53,7 +53,11 @@ class RegisterUserView(CreateView):
 @login_required()
 def FillProfile(request):
     if request.method == 'POST':
-        profile = Profile(user=request.user)
+        try:
+            profile = request.user.profile
+        except UserProfile.DoesNotExist:
+            profile = Profile(user=request.user)
+
         if request.method == 'POST':
             form = ProfileForm(request.POST,request.FILES ,instance=profile)
             print(form)

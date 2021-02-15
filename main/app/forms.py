@@ -23,4 +23,4 @@ class RegisterUserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
 	class Meta:
 		model = Profile
-		fields = ('age', 'address', 'email', 'poster', 'name', 'surname')
+		fields = ('face', 'intro', 'email', 'age', 'last_name', 'first_name')
