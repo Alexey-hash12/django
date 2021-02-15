@@ -40,6 +40,14 @@ Active | DjSports
                                 </ul>
                             </li>
                             <li><a href="./contact.html">Contacts</a></li>
+
+                            {% if request.user.is_authenticated %}
+                            <li class='ml-5'><a href="{% url 'profile' %}">{{request.user}}</a></li>
+                            <li><a href="{% url 'logout' %}">Sign Out</a></li>
+                            {% else %}
+                            <li><a href="{% url 'login_page' %}">Sign In</a></li>
+                            <li><a href="{% url 'register_page' %}">Sign Up</a></li>
+                            {% endif %}
                         </ul>
                     </nav>
                 </div>
