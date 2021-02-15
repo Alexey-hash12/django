@@ -14,7 +14,7 @@
 # 	staj = models.IntegerField()
 # 	salary = models.IntegerField()
 # 	time_work = models.TimeField()
-# 	profile = models.OneToOneField(User_Gl, on_delete=models.SET_NULL)
+# 	profile = models.OneToOneField(User_Gl, on_delete=models.CASCADE)
 # 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 # 	def __str__(self):
 # 		return f'{self.name} {self.sername}'
