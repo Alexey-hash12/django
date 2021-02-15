@@ -10,9 +10,20 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import View
 
-def index(request):
-    # spam_message('alexryzhak238@gmail.com')
-    return render(request, 'main/index.html')
+
+''' Main views '''
+# Home Page
+class HomePageView(View):
+    def get(self, request):
+        # spam_message('alexryzhak238@gmail.com')
+        return render(request, 'main/index.html')
+
+# About us Page
+class AboutUsView(View):
+    def get(self, request):
+        return render(request, 'main/about-us.html')
+''''''
+
 
 
 ''' Auth Views '''
