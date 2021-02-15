@@ -1,8 +1,8 @@
 from django.contrib import admin
 #
-from .models import User_1,Trener,User_2
+from .models import Profile, Trener, Client
 #
 #
-admin.site.register(User_1)
+admin.site.register(Profile)
 admin.site.register(Trener)
-admin.site.register(User_2)
+admin.site.register(Client)
