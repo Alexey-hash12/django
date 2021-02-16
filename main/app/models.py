@@ -8,7 +8,7 @@ class Profile(models.Model):
 	first_name = models.CharField(max_length=50, null=True, blank=True)
 	last_name = models.CharField(max_length=50, null=True, blank=True)
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	face = models.ImageField(upload_to='user_faces/', null=True, blank=True)
+	face = models.ImageField(upload_to='user_faces/', null=True)
 	intro = models.TextField(null=True)
 	email = models.EmailField(null=True, blank=True)
 	age = models.IntegerField(default=18, null=True, blank=True)

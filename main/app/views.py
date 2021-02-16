@@ -113,6 +113,23 @@ def FillProfile(request):
                 form = ProfileForm(instance=profile)
         return render(request, 'auth/fillprofile.html')
 
+def UpdateProfileView(request):
+    if request.method == 'POST':
+        try:
+            profile = request.user.profile
+        except UserProfile.DoesNotExist:
+            profile = Profile(user=request.user)
+
+        if request.method == 'POST':
+            form = ProfileForm(request.POST,request.FILES ,instance=profile)
+            print(form)
+            if form.is_valid():
+                form.save()
+                return redirect('/')
+        else:
+            form = ProfileForm(instance=profile)
+    else:
+        return  render(request, 'auth/update_profile.html')
 class Profile(View):
     def get(self, request):
         return render(request, 'auth/profile.html')

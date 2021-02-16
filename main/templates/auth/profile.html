@@ -10,7 +10,7 @@
 <img src="{% static 'img/hero-slider/hero-3.jpg' %}" alt="">
 <div style='position:absolute; color:white; top: 150px; left: 40px;'>
 {% if request.user.is_authenticated %}
-
+<img src="{{ request.user.profile.face }}" alt="">
 <h3 style='color: white;' class="mb-4">{{ request.user }}</h3>
 <p>First Name:  {{ request.user.profile.first_name }}</p>
 <p>Last Name:  {{ request.user.profile.last_name }}</p>
@@ -19,21 +19,22 @@
 <p>Email: {{ request.user.profile.email }}</p>
 <p>Is trener: {{ request.user.profile.is_trener }}</p>
 <p>Is client: {{ request.user.profile.is_client }}</p>
+<p><a href="{% url 'update_profile' %}">Update Profile</a></p>
 
-{% if request.user.profile.trener %}
-<p>Work experience: {{ request.user.profile.trener.staj }}</p>
-<p>Salary: {{ request.user.profile.trener.salary }}</p>
-<p>Time Work: {{ request.user.profile.trener.time_work }}</p>
+  {% if request.user.profile.trener %}
+  <p>Work experience: {{ request.user.profile.trener.staj }}</p>
+  <p>Salary: {{ request.user.profile.trener.salary }}</p>
+  <p>Time Work: {{ request.user.profile.trener.time_work }}</p>
 
-{% elif request.user.profile.client %}
-<p>Weight: {{ request.user.profile.client.weight }}</p>
-<p>Height: {{ request.user.profile.client.height }}</p>
-{% else %}
-<p class="mt-5"><a href="{% url 'fillprofile' %}?profile-form=trener">Trener</a></p>
-<p class="mt-5"><a href="{% url 'fillprofile' %}?profile-form=pupils">User</a></p>
-{% endif %}
-</div>
-{% else %}
-{% include 'errors/anonim.html' %}
+  {% elif request.user.profile.client %}
+  <p>Weight: {{ request.user.profile.client.weight }}</p>
+  <p>Height: {{ request.user.profile.client.height }}</p>
+  {% else %}
+  <p class="mt-5"><a href="{% url 'fillprofile' %}?profile-form=trener">Trener</a></p>
+  <p class="mt-5"><a href="{% url 'fillprofile' %}?profile-form=pupils">User</a></p>
+  </div>
+  {% endif %}
+
+{% else %} {% include 'errors/anonim.html' %}
 {% endif %}
 {% endblock %}

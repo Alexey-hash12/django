@@ -12,5 +12,6 @@ urlpatterns = [
 
 	path('fill_profile/', views.FillProfile, name='fillprofile'),
 	path('profile/', views.Profile.as_view(), name='profile'),
+	path('update_profile/', views.UpdateProfileView, name='update_profile')
 
 ]

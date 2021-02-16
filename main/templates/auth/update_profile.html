@@ -5,18 +5,15 @@ Fill your profile
 {% endblock %}
 
 {% block content %}
-{% if request.user.profile.face %}
-{% include 'errors/changed_profile.html' %}
-{% else %}
 <div class="container">
 	<div class="col-md-8 order-md-1" styl = "margin-top:100px">
-		<h4 class="mb-3" style ="color:red;">Fill Profile</h4>
+		<h4 class="mb-3" style ="color:red;">Update Profile</h4>
 		<form class="needs-validation" novalidate=""method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 			<div class="row" style = "margin-top:150px;">
 				<div class="col-md-6 mb-3">
 					<label for="inputEmail" class="sr-only" style="color:red; border-color:red;">First Name</label>
-		      <input type="text" id="inputEmail" class="form-control" name="first_name" placeholder="Email address" required="" autofocus="" style="color:red;border-color:red;">
+		      <input type="text" id="inputEmail" class="form-control" name="first_name" placeholder="Email address" value="{{ profile.first_name }}" required="" autofocus="" style="color:red;border-color:red;">
 				</div>
 				<div class="col-md-6 mb-3">
 					<label for="lastName" style ="color:red;">Last name</label>
@@ -46,7 +43,7 @@ Fill your profile
 					<label for="exampleInputAge" style ="color:red;">
 						Enter you Age
 					</label>
-					<input id="exampleInputAge"style ="color:red;border-color:red;" type="number" class="form-control" name="age" >
+					<input id="exampleInputAge"style ="color:red;border-color:red;"value="{{ profile.age }}" type="number" class="form-control" name="age" >
 				</div>
 			</div>
 			</div>
@@ -58,5 +55,4 @@ Fill your profile
 		</form>
 	</div>
 </div>
-{% endif %}
 {% endblock %}
