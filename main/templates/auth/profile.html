@@ -17,8 +17,8 @@
 <p>Intro: {{ request.user.profile.intro }}</p>
 <p>Email: {{ request.user.profile.email }}</p>
 
-<p class="mt-5"><a href="{% url 'fillprofile' %}?profile-form=trener">Trener</a></p>
-<p class="mt-5"><a href="{% url 'fillprofile' %}?profile-form=pupils">User</a></p>
+<button class="btn btn-danger btn-lg btn-block" type="submit"><a href="{% url 'fillprofile' %}?profile-form=trener" style = "color:black">Trener</a></button>
+<button class="btn btn-danger btn-lg btn-block" type="submit"><a href="{% url 'fillprofile' %}?profile-form=pupils" style = "color:black">User</a></button>
 
 </div>
 {% endblock %}
