@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from .tasks import spam_message
-from .forms import AuthUserForm, ProfileForm, RegisterUserForm
+from .forms import AuthUserForm, ProfileForm, RegisterUserForm, TrenerForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.models import User
 from django.views.generic import CreateView
 from django.contrib.auth import authenticate, login
-from .models import Profile
+from .models import Profile, Trener
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import View
@@ -64,7 +64,23 @@ class RegisterUserView(CreateView):
 @login_required()
 def FillProfile(request):
     if request.GET.get("profile-form") == 'trener':
+        if request.method == 'POST':
+            try:
+                trener = request.user.profile.trener
+            except UserProfile.DoesNotExist:
+                trener = Trener(profile=request.user.profile)
+
+            if request.method == 'POST':
+                form = TrenerForm(request.POST,request.FILES ,instance=profile)
+                print(form)
+                if form.is_valid():
+                    request.user.profile.is_trener = True
+                    form.save()
+                    return redirect('/')
+            else:
+                form = TrenerForm(instance=profile)
         return render(request, 'auth/fill_trener_profile.html')
+
     if request.GET.get("profile-form") == 'pupils':
         return render(request, 'auth/fill_pupils_profile.html')
     else:

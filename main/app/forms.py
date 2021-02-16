@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Profile
+from .models import Profile, Trener
 
 class AuthUserForm(AuthenticationForm, forms.ModelForm):
 	class Meta:
@@ -24,3 +24,8 @@ class ProfileForm(forms.ModelForm):
 	class Meta:
 		model = Profile
 		fields = ('face', 'intro', 'email', 'age', 'last_name', 'first_name')
+
+class TrenerForm(forms.ModelForm):
+	class Meta:
+		model = Trener
+		fields = ('staj', 'salary', 'time_work')
