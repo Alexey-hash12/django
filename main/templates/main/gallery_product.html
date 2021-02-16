@@ -1,0 +1,12 @@
+{% extends 'wrepper.html' %}
+
+{% block title %}
+Gallery Products | DjSports
+{% endblock %}
+
+
+{% block content %}
+{% for i in sport_product %}
+  {{ i.title }}
+{% endfor %}
+{% endblock %}

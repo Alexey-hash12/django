@@ -1,0 +1,23 @@
+{% extends 'wrepper_1.html' %}
+
+{% block title %}
+Sport Product | DjSports
+{% endblock %}
+
+{% block content %}
+{% if request.user.profile.face %}
+{% include 'errors/changed_profile.html' %}
+{% else %}
+<div class="container">
+	<div style='margin-top: 100px;'>
+		<h4 class="mb-3" style ="color:red;">Sport Product</h4>
+		<form class="needs-validation" novalidate=""method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="form-error">{{ form.non_field_errors }}</div>
+			{{ form }}
+			<button class="btn btn-danger btn-lg btn-block" type="submit">Apply</button>
+		</form>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

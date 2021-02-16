@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Profile, Trener, Client
+from .models import Profile, Trener, Client, SportProducts
 
+''' Authorization and Registration Forms '''
 class AuthUserForm(AuthenticationForm, forms.ModelForm):
 	class Meta:
 		model = User
@@ -35,3 +36,10 @@ class ClientForm(forms.ModelForm):
 	class Meta:
 		model = Client
 		fields = ('weight', 'height',)
+''''''
+
+''' Sport Products '''
+class SportProductsForm(forms.ModelForm):
+	class Meta:
+		model = SportProducts
+		fields = ("title", "price", "poster",)

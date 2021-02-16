@@ -1,7 +1,7 @@
 {% extends 'wrepper_1.html' %}
 
 {% block title %}
-Fill your profile
+Update your profile | DjSports
 {% endblock %}
 
 {% block content %}
@@ -12,18 +12,18 @@ Fill your profile
 			{% csrf_token %}
 			<div class="row" style = "margin-top:150px;">
 				<div class="col-md-6 mb-3">
-					<label for="inputEmail" class="sr-only" style="color:red; border-color:red;">First Name</label>
-		      <input type="text" id="inputEmail" class="form-control" name="first_name" placeholder="Email address" value="{{ profile.first_name }}" required="" autofocus="" style="color:red;border-color:red;">
+					<label for="inputEmail" style="color:red; border-color:red;">First Name</label>
+		      <input type="text" id="inputEmail" class="form-control" name="first_name" placeholder="" value="{{ request.user.profile.first_name }}" required="" autofocus="" style="color:red;border-color:red;">
 				</div>
 				<div class="col-md-6 mb-3">
 					<label for="lastName" style ="color:red;">Last name</label>
-					<input type="text" class="form-control" id="lastName" name='last_name' placeholder="" value="{{ profile.last_name }}" required=""style ="color:red;border-color:red;">
+					<input type="text" class="form-control" id="lastName" name='last_name' placeholder="" value="{{ request.user.profile.last_name }}" required=""style ="color:red;border-color:red;">
 
 				</div>
 			</div>
 			<div class="mb-3">
 				<label for="email" style ="color:red;">Email(Optional)</label>
-				<input type="email"  name='email' style ="color:red;border-color:red;" class="form-control" id="email" placeholder="{{ profile.email }}">
+				<input type="email"  name='email' style ="color:red;border-color:red;" class="form-control" id="email" value="{{ request.user.profile.email }}">
 			</div>
 			<div class="row">
 			<div class="col-md-6 mb-3">
@@ -43,13 +43,13 @@ Fill your profile
 					<label for="exampleInputAge" style ="color:red;">
 						Enter you Age
 					</label>
-					<input id="exampleInputAge"style ="color:red;border-color:red;"value="{{ profile.age }}" type="number" class="form-control" name="age" >
+					<input id="exampleInputAge"style ="color:red;border-color:red;"value="{{ request.user.profile.age }}" type="number" class="form-control" name="age" >
 				</div>
 			</div>
 			</div>
 			<div class="mb-3">
 				<label for="email" style ="color:red;">Intro <span class="text-muted" style ="color:red;"></span></label>
-				<textarea type="text"  name='intro' class="form-control" id="email" placeholder="{{ profile.intro }}" style ="color:red;border-color:red;"></textarea>
+				<textarea type="text"  name='intro' class="form-control" id="email" style ="color:red;border-color:red;">{{ request.user.profile.intro }}</textarea>
 			</div>
 			<button class="btn btn-danger btn-lg btn-block" type="submit">Apply</button>
 		</form>

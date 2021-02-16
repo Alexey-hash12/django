@@ -1,7 +1,7 @@
 {% extends 'wrepper_1.html' %}
 
 {% block title %}
-Fill your profile
+Fill your profile | DjSports
 {% endblock %}
 
 {% block content %}
@@ -13,20 +13,20 @@ Fill your profile
 		<h4 class="mb-3" style ="color:red;">Fill Profile</h4>
 		<form class="needs-validation" novalidate=""method="post" enctype="multipart/form-data">
 			{% csrf_token %}
+			<div class="form-error">{{ form.non_field_errors }}</div>
 			<div class="row" style = "margin-top:150px;">
 				<div class="col-md-6 mb-3">
-					<label for="inputEmail" class="sr-only" style="color:red; border-color:red;">First Name</label>
-		      <input type="text" id="inputEmail" class="form-control" name="first_name" placeholder="Email address" required="" autofocus="" style="color:red;border-color:red;">
+					<label for="inputEmail" style="color:red; border-color:red;">First Name</label>
+		      <input type="text" id="inputEmail" class="form-control" name="first_name" placeholder="First Name" required="" autofocus="" style="color:red;border-color:red;">
 				</div>
 				<div class="col-md-6 mb-3">
 					<label for="lastName" style ="color:red;">Last name</label>
-					<input type="text" class="form-control" id="lastName" name='last_name' placeholder="" value="{{ profile.last_name }}" required=""style ="color:red;border-color:red;">
-
+					<input type="text" class="form-control" id="lastName" name='last_name' placeholder="Last Name" value="{{ profile.last_name }}" required=""style ="color:red;border-color:red;">
 				</div>
 			</div>
 			<div class="mb-3">
 				<label for="email" style ="color:red;">Email(Optional)</label>
-				<input type="email"  name='email' style ="color:red;border-color:red;" class="form-control" id="email" placeholder="{{ profile.email }}">
+				<input type="email"  name='email' style ="color:red;border-color:red;" class="form-control" id="email" placeholder="Email">
 			</div>
 			<div class="row">
 			<div class="col-md-6 mb-3">
@@ -46,13 +46,13 @@ Fill your profile
 					<label for="exampleInputAge" style ="color:red;">
 						Enter you Age
 					</label>
-					<input id="exampleInputAge"style ="color:red;border-color:red;" type="number" class="form-control" name="age" >
+					<input id="exampleInputAge"style ="color:red;border-color:red;" placeholder="Enter Age" type="number" class="form-control" name="age" >
 				</div>
 			</div>
 			</div>
 			<div class="mb-3">
 				<label for="email" style ="color:red;">Intro <span class="text-muted" style ="color:red;"></span></label>
-				<textarea type="text"  name='intro' class="form-control" id="email" placeholder="{{ profile.intro }}" style ="color:red;border-color:red;"></textarea>
+				<textarea type="text"  name='intro' class="form-control" id="email" placeholder="Enter Intro" style ="color:red;border-color:red;"></textarea>
 			</div>
 			<button class="btn btn-danger btn-lg btn-block" type="submit">Apply</button>
 		</form>

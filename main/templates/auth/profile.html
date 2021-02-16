@@ -10,8 +10,8 @@
 <img src="{% static 'img/hero-slider/hero-3.jpg' %}" alt="">
 <div style='position:absolute; color:white; top: 150px; left: 40px;'>
 {% if request.user.is_authenticated %}
-<img src="{{ request.user.profile.face }}" alt="">
 <h3 style='color: white;' class="mb-4">{{ request.user }}</h3>
+
 <p>First Name:  {{ request.user.profile.first_name }}</p>
 <p>Last Name:  {{ request.user.profile.last_name }}</p>
 <p>Age:  {{request.user.profile.age}}</p>
@@ -20,7 +20,7 @@
 <p>Is trener: {{ request.user.profile.is_trener }}</p>
 <p>Is client: {{ request.user.profile.is_client }}</p>
 <p><a href="{% url 'update_profile' %}">Update Profile</a></p>
-
+<p><a href="{% url 'sport_product_add' %}">Add your Sport Product</a></p>
   {% if request.user.profile.trener %}
   <p>Work experience: {{ request.user.profile.trener.staj }}</p>
   <p>Salary: {{ request.user.profile.trener.salary }}</p>

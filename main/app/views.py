@@ -1,15 +1,20 @@
 from django.shortcuts import render, redirect
 from .tasks import spam_message
-from .forms import AuthUserForm, ProfileForm, RegisterUserForm, TrenerForm, ClientForm
+from .forms import AuthUserForm, ProfileForm, RegisterUserForm, TrenerForm, ClientForm, SportProductsForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.models import User
 from django.views.generic import CreateView
 from django.contrib.auth import authenticate, login
-from .models import Profile, Trener, Client
+from .models import Profile, Trener, Client, SportProducts
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import View
+from django.conf import settings
+# redis
+from django.core.cache import cache
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 ''' Main views '''
 # Home Page
@@ -22,8 +27,16 @@ class HomePageView(View):
 class AboutUsView(View):
     def get(self, request):
         return render(request, 'main/about-us.html')
-''''''
 
+class GalleryProducts(View):
+    def get(self, request):
+        if cache.get("product"):
+            sport_product = cache.get("product")
+        else:
+            sport_product = SportProducts.objects.all()
+            cache.set("product", sport_product)
+        return render(request, 'main/gallery_product.html', {'sport_product': sport_product})
+''''''
 
 
 ''' Auth Views '''
@@ -59,7 +72,6 @@ class RegisterUserView(CreateView):
         aut_user = authenticate(username=username, password=password)
         login(self.request, aut_user)
         return form_valid
-
 
 @login_required()
 def FillProfile(request):
@@ -130,7 +142,23 @@ def UpdateProfileView(request):
             form = ProfileForm(instance=profile)
     else:
         return  render(request, 'auth/update_profile.html')
+
+
 class Profile(View):
     def get(self, request):
         return render(request, 'auth/profile.html')
 ''''''
+
+
+''' Sport Products '''
+def sport_product_add(request):
+    if request.method == "POST":
+        form = SportProductsForm(request.POST, request.FILES)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.user = request.user
+            f.save()
+            return redirect('profile')
+    else:
+        form = SportProductsForm()
+        return render(request, 'sport_prod\sport_add.html', {'form':form})
