@@ -16,9 +16,20 @@
 <p>Age:  {{request.user.profile.age}}</p>
 <p>Intro: {{ request.user.profile.intro }}</p>
 <p>Email: {{ request.user.profile.email }}</p>
+<p>Is trener: {{ request.user.profile.is_trener }}</p>
+<p>Is client: {{ request.user.profile.is_client }}</p>
 
+{% if request.user.profile.trener %}
+<p>Work experience: {{ request.user.profile.trener.staj }}</p>
+<p>Salary: {{ request.user.profile.trener.salary }}</p>
+<p>Time Work: {{ request.user.profile.trener.time_work }}</p>
+
+{% elif request.user.profile.client %}
+<p>Weight: {{ request.user.profile.client.weight }}</p>
+<p>Height: {{ request.user.profile.client.height }}</p>
+{% else %}
 <p class="mt-5"><a href="{% url 'fillprofile' %}?profile-form=trener">Trener</a></p>
 <p class="mt-5"><a href="{% url 'fillprofile' %}?profile-form=pupils">User</a></p>
-
+{% endif %}
 </div>
 {% endblock %}

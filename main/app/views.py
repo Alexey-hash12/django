@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from .tasks import spam_message
-from .forms import AuthUserForm, ProfileForm, RegisterUserForm, TrenerForm
+from .forms import AuthUserForm, ProfileForm, RegisterUserForm, TrenerForm, ClientForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.models import User
 from django.views.generic import CreateView
 from django.contrib.auth import authenticate, login
-from .models import Profile, Trener
+from .models import Profile, Trener, Client
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import View
@@ -65,16 +65,15 @@ class RegisterUserView(CreateView):
 def FillProfile(request):
     if request.GET.get("profile-form") == 'trener':
         if request.method == 'POST':
-            try:
-                trener = request.user.profile.trener
-            except UserProfile.DoesNotExist:
-                trener = Trener(profile=request.user.profile)
+            trener = Trener(profile=request.user.profile)
 
             if request.method == 'POST':
-                form = TrenerForm(request.POST,request.FILES ,instance=profile)
+                form = TrenerForm(request.POST,request.FILES ,instance=trener)
                 print(form)
                 if form.is_valid():
-                    request.user.profile.is_trener = True
+                    f = request.user.profile
+                    f.is_trener = True
+                    f.save()
                     form.save()
                     return redirect('/')
             else:
@@ -82,6 +81,20 @@ def FillProfile(request):
         return render(request, 'auth/fill_trener_profile.html')
 
     if request.GET.get("profile-form") == 'pupils':
+        if request.method == 'POST':
+            client = Client(profile=request.user.profile)
+
+            if request.method == 'POST':
+                form = ClientForm(request.POST,request.FILES ,instance=client)
+                print(form)
+                if form.is_valid():
+                    f = request.user.profile
+                    f.is_client = True
+                    f.save()
+                    form.save()
+                    return redirect('/')
+            else:
+                form = ClientForm(instance=client)
         return render(request, 'auth/fill_pupils_profile.html')
     else:
         if request.method == 'POST':
