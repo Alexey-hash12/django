@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Activitar Template">
+  <meta name="keywords" content="Activitar, unica, creative, html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %} {% endblock %}</title>
+  {% include 'includes/style.html' %}
+</head>
+{% include 'includes/preloader.html' %}
+{% include 'includes/header_1.html' %}
+{% block content %} {% endblock %}
+{% include 'includes/script.html' %}
+</html>

@@ -1,4 +1,4 @@
-{% extends 'wrepper.html' %}
+{% extends 'wrepper_1.html' %}
 
 {% block title %}
 Authorize | DjSports authorization
@@ -6,17 +6,17 @@ Authorize | DjSports authorization
 
 {% block content %}
 <br>
-<div class="text-center" style="margin-left:auto; margin-right:auto; width:400px;">
+<div class="text-center" style="margin-top:200px;margin-left:auto; margin-right:auto; width:400px;">
     <form class="form-signin" method="post">
     {% csrf_token %}
       <div class="form-error">{{ form.non_field_errors }}</div>
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="inputEmail" class="sr-only">Login</label>
-      <input type="text" id="inputEmail" class="form-control" name="username" placeholder="Email address" required="" autofocus="">
+      <h1 class="h3 mb-3 font-weight-normal" style="color:red" >Please sign in</h1>
+      <label for="inputEmail" class="sr-only" style="color:red; border-color:red;">Login</label>
+      <input type="text" id="inputEmail" class="form-control" name="username" placeholder="Email address" required="" autofocus="" style="color:red;border-color:red;">
       <br>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required=""><br>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <label for="inputPassword" class="sr-only"  style="color:red" >Password</label>
+      <input type="password" name="password" style="color:red;border-color:red;" id="inputPassword" class="form-control" placeholder="Password" required=""><br>
+      <button class="btn btn-lg btn-danger btn-block" type="submit" >Sign in</button>
       <p class="mt-5 mb-3 text-muted">© 2020-2021</p>
     </form>
 
