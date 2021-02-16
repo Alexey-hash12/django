@@ -63,21 +63,26 @@ class RegisterUserView(CreateView):
 
 @login_required()
 def FillProfile(request):
-    if request.method == 'POST':
-        try:
-            profile = request.user.profile
-        except UserProfile.DoesNotExist:
-            profile = Profile(user=request.user)
-
+    if request.GET.get("profile-form") == 'trener':
+        return render(request, 'auth/fill_trener_profile.html')
+    if request.GET.get("profile-form") == 'pupils':
+        return render(request, 'auth/fill_pupils_profile.html')
+    else:
         if request.method == 'POST':
-            form = ProfileForm(request.POST,request.FILES ,instance=profile)
-            print(form)
-            if form.is_valid():
-                form.save()
-                return redirect('/')
-        else:
-            form = ProfileForm(instance=profile)
-    return render(request, 'auth/fillprofile.html')
+            try:
+                profile = request.user.profile
+            except UserProfile.DoesNotExist:
+                profile = Profile(user=request.user)
+
+            if request.method == 'POST':
+                form = ProfileForm(request.POST,request.FILES ,instance=profile)
+                print(form)
+                if form.is_valid():
+                    form.save()
+                    return redirect('/')
+            else:
+                form = ProfileForm(instance=profile)
+        return render(request, 'auth/fillprofile.html')
 
 class Profile(View):
     def get(self, request):

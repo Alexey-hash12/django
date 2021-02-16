@@ -34,6 +34,9 @@
 
                         {% if request.user.is_authenticated %}
                         <li class='ml-5'><a href="{% url 'profile' %}">{{request.user}}</a></li>
+                        {% if request.user.profile.poster %}
+                        <li><a href="{% url 'profile' %}" style='width: 50px;'>{{ request.user.profile.poster }}</a></li>
+                        {% endif %}
                         <li><a href="{% url 'logout' %}">Sign Out</a></li>
                         {% else %}
                         <li><a href="{% url 'login_page' %}">Sign In</a></li>
