@@ -12,6 +12,8 @@ class Profile(models.Model):
 	intro = models.TextField(null=True)
 	email = models.EmailField(null=True, blank=True)
 	age = models.IntegerField(default=18, null=True, blank=True)
+	is_trener = models.BooleanField(null=True)
+	is_client = models.BooleanField(null=True)
 
 	def __str__(self):
 		return self.user.username
@@ -43,4 +45,3 @@ class Client(models.Model):
 
 	def __str__(self):
 		return f'{self.name} {self.sername}'
-
