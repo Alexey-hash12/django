@@ -7,9 +7,10 @@
 
 {% block content %}
 {% load static %}
-
 <img src="{% static 'img/hero-slider/hero-3.jpg' %}" alt="">
 <div style='position:absolute; color:white; top: 150px; left: 40px;'>
+{% if request.user.is_authenticated %}
+
 <h3 style='color: white;' class="mb-4">{{ request.user }}</h3>
 <p>First Name:  {{ request.user.profile.first_name }}</p>
 <p>Last Name:  {{ request.user.profile.last_name }}</p>
@@ -32,4 +33,7 @@
 <p class="mt-5"><a href="{% url 'fillprofile' %}?profile-form=pupils">User</a></p>
 {% endif %}
 </div>
+{% else %}
+{% include 'errors/anonim.html' %}
+{% endif %}
 {% endblock %}

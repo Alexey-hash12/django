@@ -13,6 +13,7 @@ Fill your trener profile
 		<h4 class="mb-3">Pupils Profile</h4>
 		<form class="needs-validation" novalidate=""method="post" enctype="multipart/form-data">
 			{% csrf_token %}
+			<div class="form-error">{{ form.non_field_errors }}</div>
 			<div class="row" style = "margin-top:150px">
 				<div class="col-md-6 mb-3">
 					<label for="firstName" style="color:red; border-color:red;">Enter Weight</label>
