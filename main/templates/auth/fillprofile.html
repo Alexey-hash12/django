@@ -13,7 +13,9 @@ Fill your profile | DjSports
 		<h4 class="mb-3" style ="color:red;">Fill Profile</h4>
 		<form class="needs-validation" novalidate=""method="post" enctype="multipart/form-data">
 			{% csrf_token %}
-			<div class="form-error">{{ form.non_field_errors }}</div>
+			{% for error in form.non_field_errors %}
+					<span class="error-message" style='position:absolute;margin-top:-30px;'>{{ error }}</span>
+			{% endfor %}
 			<div class="row" style = "margin-top:150px;">
 				<div class="col-md-6 mb-3">
 					<label for="inputEmail" style="color:red; border-color:red;">First Name</label>
@@ -25,8 +27,8 @@ Fill your profile | DjSports
 				</div>
 			</div>
 			<div class="mb-3">
-				<label for="email" style ="color:red;">Email(Optional)</label>
-				<input type="email"  name='email' style ="color:red;border-color:red;" class="form-control" id="email" placeholder="Email">
+				<label for="exampleInputEmail1" style ="color:red;">Email address(Optional)</label>
+	    	<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name='email'>
 			</div>
 			<div class="row">
 			<div class="col-md-6 mb-3">
@@ -51,7 +53,7 @@ Fill your profile | DjSports
 			</div>
 			</div>
 			<div class="mb-3">
-				<label for="email" style ="color:red;">Intro <span class="text-muted" style ="color:red;"></span></label>
+				<label for="email" style ="color:red;" class="sr-only">Intro <span class="text-muted" style ="color:red;"></span></label>
 				<textarea type="text"  name='intro' class="form-control" id="email" placeholder="Enter Intro" style ="color:red;border-color:red;"></textarea>
 			</div>
 			<button class="btn btn-danger btn-lg btn-block" type="submit">Apply</button>

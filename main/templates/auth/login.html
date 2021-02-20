@@ -9,7 +9,9 @@ Authorize | DjSports authorization
 <div class="text-center" style="margin-top:200px;margin-left:auto; margin-right:auto; width:400px;">
     <form class="form-signin" method="post">
     {% csrf_token %}
-      <div class="form-error">{{ form.non_field_errors }}</div>
+      {% for error in form.non_field_errors %}
+      	<span class="error-message" style='position:absolute;margin-top:-30px;'>{{ error }}</span>
+      {% endfor %}
       <h1 class="h3 mb-3 font-weight-normal" style="color:red" >Please sign in</h1>
       <label for="inputEmail" class="sr-only" style="color:red; border-color:red;">Login</label>
       <input type="text" id="inputEmail" class="form-control" name="username" placeholder="User Name" required="" autofocus="" style="color:red;border-color:red;">
@@ -18,6 +20,7 @@ Authorize | DjSports authorization
       <input type="password" name="password" style="color:red;border-color:red;" id="inputPassword" class="form-control" placeholder="Password" required=""><br>
       <button class="btn btn-lg btn-danger btn-block" type="submit" >Sign in</button>
       <p class="mt-5 mb-3 text-muted">© 2020-2021</p>
+      <a href="/login/vk-oauth2"><img src="/static/lvk.png" class="avatar-3" data-toggle="tooltip" title="{% trans 'Login via VKontakte' %}"></a>
     </form>
 
 

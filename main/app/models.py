@@ -32,9 +32,9 @@ def save_user_profile(sender, instance, **kwargs):
 	instance.profile.save()
 
 class Trener(models.Model):
-	staj = models.CharField(max_length=10)
-	salary = models.IntegerField()
-	time_work = models.IntegerField()
+	staj = models.CharField(max_length=110, blank=True)
+	salary = models.IntegerField(null=True, blank=True)
+	time_work = models.IntegerField(null=True, blank=True)
 	profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
 
 	def __str__(self):
@@ -42,8 +42,8 @@ class Trener(models.Model):
 
 class Client(models.Model):
 	profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
-	weight = models.IntegerField()
-	height = models.IntegerField()
+	weight = models.IntegerField(null=True, blank=True)
+	height = models.IntegerField(null=True, blank=True)
 
 	def __str__(self):
 		return f'{self.weight} {self.height}'
@@ -55,6 +55,6 @@ class SportProducts(models.Model):
 	poster = models.ImageField(upload_to='poster/', null=True, blank=True)
 	date = models.DateField(auto_now=True)
 	user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-	
+
 	def __str__(self):
 		return self.title

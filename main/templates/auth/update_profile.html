@@ -10,6 +10,9 @@ Update your profile | DjSports
 		<h4 class="mb-3" style ="color:red;">Update Profile</h4>
 		<form class="needs-validation" novalidate=""method="post" enctype="multipart/form-data">
 			{% csrf_token %}
+			{% for error in form.non_field_errors %}
+				<span class="error-message" style='position:absolute;margin-top:-30px;'>{{ error }}</span>
+			{% endfor %}
 			<div class="row" style = "margin-top:150px;">
 				<div class="col-md-6 mb-3">
 					<label for="inputEmail" style="color:red; border-color:red;">First Name</label>
@@ -23,7 +26,7 @@ Update your profile | DjSports
 			</div>
 			<div class="mb-3">
 				<label for="email" style ="color:red;">Email(Optional)</label>
-				<input type="email"  name='email' style ="color:red;border-color:red;" class="form-control" id="email" value="{{ request.user.profile.email }}">
+				<input type="email"  name='email' style ="color:red;border-color:red;" class="form-control" id="email" value="">
 			</div>
 			<div class="row">
 			<div class="col-md-6 mb-3">

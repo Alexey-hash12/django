@@ -7,10 +7,11 @@ urlpatterns = [
 	path('', views.HomePageView.as_view(), name='home'),
 	path('about-us/', views.AboutUsView.as_view(), name='about'),
 	path('gallery_product/', views.GalleryProducts.as_view(), name='gallery_product'),
+	# path('blog', views.BlogView.as_view(), name='blog'),
 
 	# auth
 	path('login/', views.MyProjectLoginView.as_view(), name='login_page'),
-	path('register/', views.RegisterUserView.as_view(), name='register_page'),
+	path('register/', views.register, name='register_page'),
 	path('logout', views.MyProjectLogoutView.as_view(), name='logout'),
 
 	# profile
@@ -20,4 +21,5 @@ urlpatterns = [
 
 	#sport products
 	path('sport_product_add/', views.sport_product_add, name='sport_product_add')
+
 ]

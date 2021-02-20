@@ -5,29 +5,22 @@ Fill your profile | DjSports
 {% endblock %}
 
 {% block content %}
-{% if request.user.profile.trener %}
-<p class="lead" style='margin-top:100px;'>You have fill your profile, if you want to change them, <a href='{% url "profile" %}'>click here</a></p>
-{% else %}
 <div class="mt-5 container" >
 	<div class="col-md-8 order-md-1">
 		<h4 class="mb-3">Trener Profile</h4>
 		<form class="needs-validation" novalidate=""method="post" enctype="multipart/form-data">
 			{% csrf_token %}
-			<div class="form-error">{{ form.non_field_errors }}</div>
+			{% for error in form.non_field_errors %}
+				{{ error }}
+			{% endfor %}
 			<div class="row"style = "margin-top:150px">
 				<div class="col-md-6 mb-3">
 					<label for="firstName" style="color:red; border-color:red;">Work Experience</label>
-					<input type="text" class="form-control" name="staj" style="color:red; border-color:red;" id="firstName" placeholder="" value="" required="">
-					<div class="invalid-feedback" >
-						Valid first name is required.
-					</div>
+					  <input type="text" id="inputEmail" class="form-control" name="staj" placeholder="Enter your Work experience" autofocus="" style="color:red;border-color:red;">
 				</div>
 				<div class="col-md-6 mb-3">
 					<label for="lastName" style="color:red; border-color:red;">Salary</label>
-					<input type="number" class="form-control" id="lastName" name='salary' placeholder="" value="" required="" style="color:red; border-color:red;">
-					<div class="invalid-feedback">
-						Valid last name is required.
-					</div>
+					<input type="number" class="form-control" id="lastName" name='salary' placeholder="Enter your Salary" value="" style="color:red; border-color:red;">
 				</div>
 			</div>
 			<div class="row">
@@ -36,7 +29,7 @@ Fill your profile | DjSports
 					<label for="exampleInputAge" style="color:red; border-color:red;">
 						Time work
 					</label>
-					<input id="exampleInputAge" type="number" class="form-control" style="color:red; border-color:red;" name="time_work" >
+					<input id="exampleInputAge" type="number" class="form-control" placeholder="Enter your Time Work" style="color:red; border-color:red;" name="time_work" >
 				</div>
 			</div>
 			</div>
@@ -44,5 +37,4 @@ Fill your profile | DjSports
 		</form>
 	</div>
 </div>
-{% endif %}
 {% endblock %}

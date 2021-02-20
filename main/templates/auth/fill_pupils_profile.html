@@ -5,9 +5,6 @@ Fill your trener profile | DjSports
 {% endblock %}
 
 {% block content %}
-<!-- {% if request.user.profile.client %}
-<p class="lead" style='margin-top:100px;'>You have fill your profile, if you want to change them, <a href='{% url "profile" %}'>click here</a></p>
-{% else %} -->
 <div class="mt-5 container" >
 	<div class="col-md-8 order-md-1">
 		<h4 class="mb-3">Pupils Profile</h4>
@@ -18,24 +15,17 @@ Fill your trener profile | DjSports
 				<div class="col-md-6 mb-3">
 					<label for="firstName" style="color:red; border-color:red;">Enter Weight</label>
 					<input type="number" class="form-control" name="weight" style="color:red; border-color:red;" id="firstName" placeholder="" value="" required="">
-					<div class="invalid-feedback">
-						Valid width is required.
-					</div>
 				</div>
 			</div>
 				<div class="row" style = "margin-top:150px">
 					<div class="col-md-6 mb-3">
 						<label for="firstName" style="color:red; border-color:red;">Enter Height</label>
 						<input type="number" class="form-control" name="height" style="color:red; border-color:red;" id="firstName" placeholder="" value="" required="">
-						<div class="invalid-feedback">
-							Valid height is required.
-						</div>
+
 					</div>
 				</div>
-			</div>
 			<button class="btn btn-danger btn-lg btn-block" type="submit">Apply</button>
 		</form>
 	</div>
 </div>
-{% endif %}
 {% endblock %}

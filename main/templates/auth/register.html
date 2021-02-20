@@ -10,7 +10,9 @@ Register | DjSports Registration
     <div class="text-center" style="margin-top:150px;margin-left:auto; margin-right:auto; width:400px;">
     <form class="form-signin" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="form-error">{{ form.non_field_errors }}</div>
+    {% for error in form.non_field_errors %}
+        <span class="error-message">{{ error }}</span>
+    {% endfor %}
     <h1 class="h3 mb-3 font-weight-normal" style = "color:red;">Please sign Up</h1>
     <label for="inputEmail" class="sr-only">Login</label>
     <input type="text" id="inputEmail" class="form-control" name="username" placeholder="Username" required="" autofocus="" style ="color:red;border-color:red;">

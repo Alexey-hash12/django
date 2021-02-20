@@ -8,5 +8,10 @@ Gallery Products | DjSports
 {% block content %}
 {% for i in sport_product %}
   {{ i.title }}
+  {% if i.poster %}
+  <img src='{{ i.poster.url }}'>
+  {% else %}
+  
+  {% endif %}
 {% endfor %}
 {% endblock %}

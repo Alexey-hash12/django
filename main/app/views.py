@@ -4,6 +4,7 @@ from .forms import AuthUserForm, ProfileForm, RegisterUserForm, TrenerForm, Clie
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.models import User
 from django.views.generic import CreateView
+from django.views.generic import ListView
 from django.contrib.auth import authenticate, login
 from .models import Profile, Trener, Client, SportProducts
 from django.urls import reverse_lazy
@@ -13,6 +14,8 @@ from django.conf import settings
 # redis
 from django.core.cache import cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
+
+from django.contrib import messages
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
@@ -54,24 +57,25 @@ class MyProjectLogoutView(LogoutView):
 	next_page = reverse_lazy('home')
 
 #Registration
-class RegisterUserView(CreateView):
-    model = User
-    template_name = 'auth/register.html'
-    form_class = RegisterUserForm
-    success_url = reverse_lazy('fillprofile')
-    success_msg = 'Пользователь создан'
+def register(request):
+    if request.method == 'POST':
+        form = RegisterUserForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
 
-    def form_invalid(self, form):
-	    """If the form is invalid, render the invalid form."""
-	    return redirect('valid_error')
-
-    def form_valid(self, form):
-        form_valid = super().form_valid(form)
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        aut_user = authenticate(username=username, password=password)
-        login(self.request, aut_user)
-        return form_valid
+            user = authenticate(username=username, password=password)
+            if user and user.is_active:
+                form.add_error(None, 'This username is already exits')
+                return render(request, 'auth/register.html', {'form': form})
+            else:
+                user = form.save()
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                return redirect('fillprofile')
+        else:
+            return render(request, 'auth/register.html', {'form': form})
+    else:
+        return render(request, 'auth/register.html', {'form': RegisterUserForm()})
 
 @login_required()
 def FillProfile(request):
@@ -87,7 +91,7 @@ def FillProfile(request):
                     f.is_trener = True
                     f.save()
                     form.save()
-                    return redirect('/')
+                    return redirect('profile')
             else:
                 form = TrenerForm(instance=profile)
         return render(request, 'auth/fill_trener_profile.html')
@@ -104,7 +108,7 @@ def FillProfile(request):
                     f.is_client = True
                     f.save()
                     form.save()
-                    return redirect('/')
+                    return redirect('profile')
             else:
                 form = ClientForm(instance=client)
         return render(request, 'auth/fill_pupils_profile.html')
@@ -120,7 +124,10 @@ def FillProfile(request):
                 print(form)
                 if form.is_valid():
                     form.save()
-                    return redirect('/')
+                    return redirect('profile')
+                else:
+                    form.add_error(None, 'Form is not valid, check please email address and poster')
+                    return render(request, 'auth/fillprofile.html', {'form': form})
             else:
                 form = ProfileForm(instance=profile)
         return render(request, 'auth/fillprofile.html')
@@ -134,10 +141,12 @@ def UpdateProfileView(request):
 
         if request.method == 'POST':
             form = ProfileForm(request.POST,request.FILES ,instance=profile)
-            print(form)
             if form.is_valid():
                 form.save()
-                return redirect('/')
+                return redirect('profile')
+            else:
+                form.add_error(None, 'Form is not valid, check please email address and poster')
+                return render(request, 'auth/update_profile.html', {'form': form})
         else:
             form = ProfileForm(instance=profile)
     else:
@@ -154,11 +163,20 @@ class Profile(View):
 def sport_product_add(request):
     if request.method == "POST":
         form = SportProductsForm(request.POST, request.FILES)
+        print(form)
         if form.is_valid():
             f = form.save(commit=False)
             f.user = request.user
             f.save()
             return redirect('profile')
+        else:
+            messages.error(request, 'Invalid login details supplied.')
+            return render(request, 'sport_prod\sport_add.html', {'form':form})
     else:
         form = SportProductsForm()
         return render(request, 'sport_prod\sport_add.html', {'form':form})
+
+#
+# ''' Blog '''
+# class BlogView(ListView):
+#

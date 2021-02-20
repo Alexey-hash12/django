@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Profile, Trener, Client, SportProducts
 
+# Captcha
+from captcha.fields import CaptchaField
+
 ''' Authorization and Registration Forms '''
 class AuthUserForm(AuthenticationForm, forms.ModelForm):
 	class Meta:
@@ -31,7 +34,6 @@ class TrenerForm(forms.ModelForm):
 		model = Trener
 		fields = ('staj', 'salary', 'time_work')
 
-
 class ClientForm(forms.ModelForm):
 	class Meta:
 		model = Client
@@ -40,6 +42,8 @@ class ClientForm(forms.ModelForm):
 
 ''' Sport Products '''
 class SportProductsForm(forms.ModelForm):
+	captcha = CaptchaField()
+
 	class Meta:
 		model = SportProducts
 		fields = ("title", "price", "poster",)
