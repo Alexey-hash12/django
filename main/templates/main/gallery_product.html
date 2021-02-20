@@ -1,4 +1,4 @@
-{% extends 'wrepper.html' %}
+{% extends 'wrepper_1.html' %}
 
 {% block title %}
 Gallery Products | DjSports
@@ -6,12 +6,31 @@ Gallery Products | DjSports
 
 
 {% block content %}
+
 {% for i in sport_product %}
-  {{ i.title }}
-  {% if i.poster %}
+<div class="col" >
+          <div class="card shadow-sm" style = "margin-top: 150px;">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#55595c"></rect>
+            	<text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ i.title }}</text>
+            	{% if i.poster %}
   <img src='{{ i.poster.url }}'>
   {% else %}
   
-  {% endif %}
+  {% endif %}</svg>
+
+            <div class="card-body">
+              <p class="card-text">{{ i.intro }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">{{ i.price }} $ </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+  
 {% endfor %}
 {% endblock %}

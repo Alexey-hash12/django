@@ -23,8 +23,8 @@
                       {% url 'about' as url_about %}
                         <li {% if request.path == url_about %}class='active'{% endif %}><a href="{{ url_about }}">About us</a></li>
                         <li><a href="./schedule.html">Schedule</a></li>
-                        <li><a href="./gallery.html">Gallery</a></li>
-                        <li><a href="./blog.html">Blog</a>
+                        <li><a href="{% url 'gallery_product' %}">Gallery</a></li>
+                        <li><a href="">Blog</a>
                             <ul class="dropdown">
                                 <li><a href="./about-us.html">About Us</a></li>
                                 <li><a href="./blog-single.html">Blog Details</a></li>
@@ -34,6 +34,9 @@
 
                         {% if request.user.is_authenticated %}
                         <li class='ml-5'><a href="{% url 'profile' %}">{{request.user}}</a></li>
+                        {% if request.user.profile.poster %}
+                        <li><a href="{% url 'profile' %}" style='width: 50px;'>{{ request.user.profile.poster }}</a></li>
+                        {% endif %}
                         <li><a href="{% url 'logout' %}">Sign Out</a></li>
                         {% else %}
                         <li><a href="{% url 'login_page' %}">Sign In</a></li>
@@ -46,4 +49,3 @@
         <div id="mobile-menu-wrap"></div>
     </div>
 </header>
-<!-- Header End -->

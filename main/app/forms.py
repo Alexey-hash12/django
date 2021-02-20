@@ -46,4 +46,4 @@ class SportProductsForm(forms.ModelForm):
 
 	class Meta:
 		model = SportProducts
-		fields = ("title", "price", "poster",)
+		fields = ("title", "price", "poster","intro")

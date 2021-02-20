@@ -55,6 +55,6 @@ class SportProducts(models.Model):
 	poster = models.ImageField(upload_to='poster/', null=True, blank=True)
 	date = models.DateField(auto_now=True)
 	user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-
+	intro = models.TextField(null=True, blank=True)
 	def __str__(self):
 		return self.title

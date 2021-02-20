@@ -19,8 +19,8 @@
 <p>Email: {{ request.user.profile.email }}</p>
 <p>Is trener: {{ request.user.profile.is_trener }}</p>
 <p>Is client: {{ request.user.profile.is_client }}</p>
-<p><a href="{% url 'update_profile' %}">Update Profile</a></p>
-<p><a href="{% url 'sport_product_add' %}">Add your Sport Product</a></p>
+<p><a class = "btn btn-outline-danger" href="{% url 'update_profile' %}">Update Profile</a></p>
+<p class = "mt-4"><a href="{% url 'sport_product_add' %}" class = "btn btn-outline-danger">Add your Sport Product</a></p>
   {% if request.user.profile.trener %}
   <p>Work experience: {{ request.user.profile.trener.staj }}</p>
   <p>Salary: {{ request.user.profile.trener.salary }}</p>
@@ -30,8 +30,8 @@
   <p>Weight: {{ request.user.profile.client.weight }}</p>
   <p>Height: {{ request.user.profile.client.height }}</p>
   {% else %}
-  <p class="mt-5"><a href="{% url 'fillprofile' %}?profile-form=trener">Trener</a></p>
-  <p class="mt-5"><a href="{% url 'fillprofile' %}?profile-form=pupils">User</a></p>
+  <p class="mt-4"><a  class = "btn btn-outline-danger" href="{% url 'fillprofile' %}?profile-form=trener">Trener</a></p>
+  <p class="mt-4"><a  class = "btn btn-outline-danger" href="{% url 'fillprofile' %}?profile-form=pupils">User</a></p>
   </div>
   {% endif %}
 
