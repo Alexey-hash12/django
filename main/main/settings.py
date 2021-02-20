@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'django_celery_results',
     'captcha',
-    'social_django',
 ]
 
 MIDDLEWARE = [

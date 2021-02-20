@@ -170,7 +170,7 @@ def sport_product_add(request):
             f.save()
             return redirect('profile')
         else:
-            messages.error(request, 'Invalid login details supplied.')
+            messages.error(request, 'Please, fix this errors:')
             return render(request, 'sport_prod\sport_add.html', {'form':form})
     else:
         form = SportProductsForm()
